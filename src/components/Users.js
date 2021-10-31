@@ -17,9 +17,11 @@ const Users = () => {
     const {loading, error, data} = useQuery(gql`
         {
             getAllUsers {
-                id
+                _id
                 firstName
+                lastName
                 email
+                age
                 role
             }
         }
