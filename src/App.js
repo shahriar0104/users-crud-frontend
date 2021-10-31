@@ -19,7 +19,7 @@ function App() {
                         <Route exact path='/' component={Home} />
                         <Route exact path='/studentlist' component={StudentList} />
                         <Route exact path='/addstudent' component={AddStudent} />
-                        <Route exact path='/postdetaols/:postid' component={PostDetails} />
+                        <Route exact path='/postdetails/:postid' component={PostDetails} />
                     </Switch>
                 </PersistGate>
             </Provider>
