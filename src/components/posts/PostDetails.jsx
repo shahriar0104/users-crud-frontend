@@ -32,7 +32,18 @@ function PostDetails() {
         <div className="shadow-md mb-2 pb-2">
           <h1 className="text-3xl font-semibold text-center">{post.title}</h1>
 
-          <p className="mt-2 px-4">{post.details}</p>
+          <div>
+            <p className="my-2 px-4">{post.details}</p>
+            <div class="w-full flex items-start justify-end px-3">
+              <div class="-mr-1">
+                <input
+                  type="submit"
+                  className=" bg-indigo-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-indigo-400"
+                  value="Update Post"
+                />
+              </div>
+            </div>
+          </div>
 
           <div class="ml-4">
             <form class="w-full max-w-xl bg-white rounded-lg pt-2">
@@ -48,7 +59,7 @@ function PostDetails() {
                     required
                   ></textarea>
                 </div>
-                <div class="w-full flex items-start justify-end md:w-full px-3">
+                <div class="w-full flex items-start justify-end px-3">
                   <div class="-mr-1">
                     <input
                       type="submit"
