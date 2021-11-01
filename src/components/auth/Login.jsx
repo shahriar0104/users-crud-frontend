@@ -1,6 +1,8 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 function Login() {
+    const history = useHistory()
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
@@ -9,6 +11,9 @@ function Login() {
         let password = e.target.elements.password?.value
 
         console.log(email, password)
+
+        if(password === '1234') history.push('/home')
+        else alert('Wrong Password!!!')
     }
 
     return (

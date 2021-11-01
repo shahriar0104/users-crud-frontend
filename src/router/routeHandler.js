@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Home from '../components/home/Home'
 import StudentList from '../components/students/StudentList'
 import AddStudent from '../components/students/AddStudent'
@@ -10,7 +10,10 @@ function routeHandler() {
     return (
         <Router>
             <Switch>
-                <Route exact path='/' component={Home} />
+                <Route exact path="/">
+                    <Redirect to="/login" />
+                </Route>
+                <Route exact path='/home' component={Home} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/studentlist' component={StudentList} />
                 <Route exact path='/addstudent' component={AddStudent} />
