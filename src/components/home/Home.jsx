@@ -1,6 +1,6 @@
 import React from 'react'
-import CreatePost from './CreatePost'
-import PostList from './PostList'
+import CreatePost from '../posts/CreatePost'
+import PostList from '../posts/PostList'
 import {Link} from 'react-router-dom'
 
 function Home() {
