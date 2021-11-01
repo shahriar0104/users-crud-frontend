@@ -5,7 +5,6 @@ import StudentList from '../components/students/StudentList'
 import AddStudent from '../components/students/AddStudent'
 import PostDetails from '../components/posts/PostDetails'
 import Login from '../components/auth/Login'
-import Signup from '../components/auth/Signup'
 
 function routeHandler() {
     return (
@@ -13,7 +12,6 @@ function routeHandler() {
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={Signup} />
                 <Route exact path='/studentlist' component={StudentList} />
                 <Route exact path='/addstudent' component={AddStudent} />
                 <Route exact path='/postdetails/:postid' component={PostDetails} />
