@@ -1,4 +1,6 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
+import { useParams, gql } from "react-router";
 
 const post = {
   title: "Demo Post",
@@ -26,6 +28,29 @@ const arr = [
 ];
 
 function PostDetails() {
+  const { postid } = useParams();
+  const { loading, error, data } = useQuery(gql`
+         {
+            getPostById(postId:$PostId)
+            {
+              title
+              details
+              comments
+                {
+                  commentor
+                  commentDetails
+                }
+            }
+            {
+              "PostId":{
+                "_id":postid
+            }
+          }   
+      
+  `);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
   return (
     <div className="w-1/3 mx-auto my-8">
       <div className="shadow-md p-3">
