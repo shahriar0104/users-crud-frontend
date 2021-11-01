@@ -40,7 +40,7 @@ function PostDetails() {
                 </h2>
                 <div class="w-full md:w-full px-3 mb-1 -mt-1">
                   <textarea
-                    class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+                    className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white focus:placeholder-opacity-0"
                     name="body"
                     placeholder="Write a comment..."
                     required
@@ -50,7 +50,7 @@ function PostDetails() {
                   <div class="-mr-1">
                     <input
                       type="submit"
-                      class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+                      className=" bg-indigo-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-indigo-400"
                       value="Post Comment"
                     />
                   </div>
@@ -64,15 +64,15 @@ function PostDetails() {
           <h1 className="text-xl font-medium">Comments</h1>
           {arr.map((item, key) => {
             return (
-              <div class="flex">
-                <div class="my-2">
-                  <div class="bg-gray-100 w-auto rounded-xl p-2 pb-2">
-                    <div class="font-medium">
-                      <a href="#" class="hover:underline text-sm">
+              <div className="flex">
+                <div className="my-2">
+                  <div className="bg-gray-100 w-auto rounded-xl p-2 pb-2">
+                    <div className="font-medium">
+                      <a href="#" className="hover:underline text-sm">
                         <h2>Nirmala</h2>
                       </a>
                     </div>
-                    <div class="text-sm">{item}</div>
+                    <div className="text-sm">{item}</div>
                   </div>
                 </div>
               </div>
