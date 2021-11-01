@@ -27,11 +27,13 @@ const arr = [
 
 function PostDetails() {
   return (
-    <div className=" w-1/3 mx-auto my-8">
+    <div className="w-1/3 mx-auto my-8">
       <div className="shadow-md p-3">
         <div className="shadow-md mb-2 pb-2">
           <h1 className="text-3xl font-semibold text-center">{post.title}</h1>
+
           <p className="mt-2 px-4">{post.details}</p>
+
           <div class="ml-4">
             <form class="w-full max-w-xl bg-white rounded-lg pt-2">
               <div class="flex flex-wrap -mx-3 mb-6">
@@ -60,7 +62,7 @@ function PostDetails() {
           </div>
         </div>
 
-        <div className="">
+        <div>
           <h1 className="text-xl font-medium">Comments</h1>
           {arr.map((item, key) => {
             return (
