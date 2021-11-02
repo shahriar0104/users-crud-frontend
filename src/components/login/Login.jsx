@@ -5,7 +5,9 @@ import { useHistory } from "react-router";
 const LOGIN = gql`
   mutation signin($signInInfo:SignInInput){
     signIn(signInInput:$signInInfo) {
-      JWT
+      JWT,
+      username,
+      role
     }
   }
 `
@@ -32,7 +34,9 @@ function Login() {
     setPassword('')
     console.log(data)
     if(data){
-     localStorage.setItem('token', data.signIn.JWT)
+      localStorage.setItem('token', data.signIn.JWT)
+      localStorage.setItem('username', data.signIn.username)
+      localStorage.setItem('role', data.signIn.role)
       history.push('/home')
     }
   }
