@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from '../navbar/Navbar';
 
 function StudentList(props) {
 
@@ -33,16 +34,16 @@ function StudentList(props) {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex flex-col">
+      <Navbar/>
 
-
-      <div className="bg-green-200 m-4 mx-auto md:w-2/3 lg:w-1/2 sm:w-11/12 rounded-xl">
-        <p className="mt-8 text-center text-3xl text-black font-bold"> Student List</p>
+      <div className="bg-yellow-50 m-4 mx-auto md:w-2/3 lg:w-1/2 sm:w-11/12 rounded-xl">
+        <p className="mt-8 mb-4 text-center text-3xl text-black font-bold"> Student List</p>
 
         {Students.map(data => (
           <div key={data.Id} className="list w-full">
             <div style={{ display: 'flex', justifyContent: "space-between inline block" }}>
-              <div className="h-44 w-full px-5 mx-5 my-7 py-5 border-white border-4  rounded-lg transition-transform hover:bg-green-300 flex flex-row justify-between"   >
+              <div className="h-auto w-full px-5 mx-5 my-3 border-white border-4 rounded-lg transition-transform bg-green-200 hover:bg-green-300 flex flex-row justify-between"   >
                 <div>
                   <br /><b>Student ID: </b>{data.Id}
                   <br /><b>Name: </b>{data.Name}
