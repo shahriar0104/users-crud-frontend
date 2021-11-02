@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import React from "react";
-import { useParams, gql } from "react-router";
+import { useParams } from "react-router";
 
 const post = {
   title: "Demo Post",
