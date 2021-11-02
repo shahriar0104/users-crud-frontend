@@ -36,7 +36,7 @@ function StudentList(props) {
     <div className="flex">
 
 
-      <div className="bg-green-200  m-4  mx-auto  w-auto">
+      <div className="bg-green-200 m-4 mx-auto md:w-2/3 lg:w-1/2 sm:w-11/12 rounded-xl">
         <p className="mt-8 text-center text-3xl text-black font-bold"> Student List</p>
 
         {Students.map(data => (
