@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
-import { useParams, gql } from "react-router";
+import { useParams } from "react-router";
+import gql from "graphql-tag";
 
 const post = {
   title: "Demo Post",
@@ -28,26 +29,24 @@ const arr = [
 ];
 
 function PostDetails() {
-  const { postid } = useParams();
-  const { loading, error, data } = useQuery(gql`
-         {
-            getPostById(postId:$PostId)
-            {
-              title
-              details
-              comments
-                {
-                  commentor
-                  commentDetails
-                }
-            }
-            {
-              "PostId":{
-                "_id":postid
-            }
-          }   
-      
-  `);
+  const { postid: PostId } = useParams();
+  const GET_POST = gql`
+    {
+      getPostById(postId: $PostId) {
+        title
+        details
+        comments {
+          commentor
+          commentDetails
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(GET_POST, {
+    variables: { PostId },
+  });
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
