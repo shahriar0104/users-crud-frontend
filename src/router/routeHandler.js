@@ -4,7 +4,7 @@ import Home from '../components/home/Home'
 import StudentList from '../components/students/StudentList'
 import AddStudent from '../components/students/AddStudent'
 import PostDetails from '../components/posts/PostDetails'
-import Login from '../components/auth/Login'
+import Login from '../components/login/Login'
 
 function routeHandler() {
     return (

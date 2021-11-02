@@ -1,37 +1,18 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router";
-import gql from "graphql-tag";
-
-const post = {
-  title: "Demo Post",
-  details: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
-  commentList: [
-    {
-      name: "Jahid",
-      comment: "It's nice!",
-    },
-    {
-      name: "Emon",
-      comment: "Oh! It's great.",
-    },
-  ],
-};
-
-const arr = [
-  "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
-  "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-  "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
-  "How are you?",
-  "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-];
 
 function PostDetails() {
-  const { postid: PostId } = useParams();
+  // const { postid: PostId } = useParams();
+  localStorage.setItem(
+    "token",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTYzNTg0MzAxMSwiZXhwIjoxNjM1OTI5NDExfQ.e_sB5VeariYmmw1bk0lTiLbofFE3q5GiDGpG_0YjwPE"
+  );
+  const PostId = {
+    _id: "618117a0c29b1235d2a0e945",
+  };
   const GET_POST = gql`
-    {
+    query getPost($PostId: PostId) {
       getPostById(postId: $PostId) {
         title
         details
@@ -42,7 +23,6 @@ function PostDetails() {
       }
     }
   `;
-
   const { loading, error, data } = useQuery(GET_POST, {
     variables: { PostId },
   });
@@ -54,10 +34,12 @@ function PostDetails() {
     <div className="w-1/3 mx-auto my-8">
       <div className="shadow-md p-3">
         <div className="shadow-md mb-2 pb-2">
-          <h1 className="text-3xl font-semibold text-center">{post.title}</h1>
+          <h1 className="text-3xl font-semibold text-center">
+            {data.getPostById.title}
+          </h1>
 
           <div>
-            <p className="my-2 px-4">{post.details}</p>
+            <p className="my-2 px-4">{data.getPostById.details}</p>
             <div class="w-full flex items-start justify-end px-3">
               <div class="-mr-1">
                 <input
@@ -99,17 +81,17 @@ function PostDetails() {
 
         <div>
           <h1 className="text-xl font-medium">Comments</h1>
-          {arr.map((item, key) => {
+          {data.getPostById.comments.map((item, key) => {
             return (
               <div className="flex">
                 <div className="my-2">
                   <div className="bg-gray-100 w-auto rounded-xl p-2 pb-2">
                     <div className="font-medium">
                       <a href="#" className="hover:underline text-sm">
-                        <h2>Nirmala</h2>
+                        <h2>{item.commentor}</h2>
                       </a>
                     </div>
-                    <div className="text-sm">{item}</div>
+                    <div className="text-sm">{item.commentDetails}</div>
                   </div>
                 </div>
               </div>

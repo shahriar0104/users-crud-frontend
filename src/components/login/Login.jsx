@@ -1,5 +1,54 @@
-import React from "react";
+import React,{useState} from "react";
+import {gql, createHttpLink, useMutation} from "@apollo/client"
+import { useHistory } from "react-router";
+
+const LOGIN = gql`
+  mutation signin($signInInfo:SignInInput){
+    signIn(signInInput:$signInInfo) {
+      JWT,
+      username,
+      role
+    }
+  }
+`
 function Login() {
+  const history = useHistory()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [input, {data, loading, error}] = useMutation(LOGIN)
+  if (loading) return 'submitting'
+  if (error) return error.message
+
+  function login(e){
+    e.preventDefault()
+    console.log(username, password)
+    input({
+      variables:{
+        "signInInfo":{
+          "username": username,
+          "password": password
+        }
+      }
+    })
+    setPassword('')
+    console.log(data)
+    if(data){
+      localStorage.setItem('token', data.signIn.JWT)
+      localStorage.setItem('username', data.signIn.username)
+      localStorage.setItem('role', data.signIn.role)
+      history.push('/home')
+    }
+  }
+
+  function usernameHandleChange(e){
+    setUsername(e.target.value)
+  }
+
+  function passwordHandleChange(e){
+    setPassword(e.target.value)
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-4">
@@ -10,10 +59,8 @@ function Login() {
         </div>
         <form
           className="bg-white shadow-md rounded-xl px-10 pt-8 pb-8 mb-8"
-          action="#"
-          method="POST"
+          onSubmit={login}
         >
-          <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px mb-8">
             <div className="mb-4">
               <label
@@ -28,6 +75,7 @@ function Login() {
                 required
                 className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
+                onChange={e=>usernameHandleChange(e)}
               />
             </div>
             <div className="mb-6">
@@ -44,10 +92,10 @@ function Login() {
                 required
                 className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+                onChange={e=>passwordHandleChange(e)}
               />
             </div>
           </div>
-
           <div className="pb-4 mb-2">
             <button
               type="submit"
