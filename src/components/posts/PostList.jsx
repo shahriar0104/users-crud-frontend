@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux'
 function PostList() {
     const posts = useSelector(state => state.postReducer.posts)
 
-    console.log(posts)
-
     return (
         <>
             {
