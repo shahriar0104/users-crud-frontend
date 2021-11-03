@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {gql, useMutation} from "@apollo/client"
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 const LOGIN = gql`
   mutation signin($signInInfo:SignInInput){
@@ -19,26 +19,24 @@ function Login() {
   const [input, {data, loading, error}] = useMutation(LOGIN)
   if (loading) return 'submitting'
   if (error) return error.message
+  if(data){
+    localStorage.setItem('token', data.signIn.JWT)
+    localStorage.setItem('username', data.signIn.username)
+    localStorage.setItem('role', data.signIn.role)
+  }
 
-  function login(e){
+  async function login (e){
     e.preventDefault()
-    console.log(username, password)
-    input({
+    await input({
       variables:{
         "signInInfo":{
           "username": username,
           "password": password
         }
       }
-    })
-    setPassword('')
-    console.log(data)
-    if(data){
-      localStorage.setItem('token', data.signIn.JWT)
-      localStorage.setItem('username', data.signIn.username)
-      localStorage.setItem('role', data.signIn.role)
+    }).then(()=>
       history.push('/home')
-    }
+    )
   }
 
   function usernameHandleChange(e){
@@ -76,6 +74,7 @@ function Login() {
                 className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
                 onChange={e=>usernameHandleChange(e)}
+                required
               />
             </div>
             <div className="mb-6">
@@ -93,6 +92,7 @@ function Login() {
                 className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 onChange={e=>passwordHandleChange(e)}
+                required
               />
             </div>
           </div>

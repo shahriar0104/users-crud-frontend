@@ -5,14 +5,16 @@ import {Link} from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {GoListUnordered} from 'react-icons/go'
+import { useHistory } from "react-router";
 
 function Home() {
+  const history = useHistory()
+  if(!localStorage.getItem('token')) history.push('/login')
     const role = 'teacher'
     return (
         <>
             <div className="flex flex-col">
                 <Navbar />
-
                 <div className="flex flex-col bg-yellow-50 sm:mx-10 md:mx-22 lg:mx-28 xl:mx-64 mx-4 mt-5 border-2 rounded-lg shadow-xl">
                     {role === 'teacher' && 
                         <div className="flex flex-row justify-end">

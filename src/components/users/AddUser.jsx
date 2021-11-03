@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
 import {gql, useMutation} from "@apollo/client"
+import { useHistory } from "react-router";
 
 function AddUser() {
+  const history = useHistory()
   const [username, setUsername] = useState('')
   const [role, setRole] = useState('STUDENT')
   const [password, setPassword] = useState('')
@@ -15,6 +17,8 @@ function AddUser() {
       }
     }
   `
+
+  if(!localStorage.getItem('token')) history.push('/login')
 
   const [input, {data, loading, error}] = useMutation(CREATE_USER)
   if (loading) return 'submitting'
