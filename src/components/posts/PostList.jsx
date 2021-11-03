@@ -1,6 +1,5 @@
 import React from 'react'
 import { RiDeleteBinLine } from 'react-icons/ri'
-import { FaRegEdit } from 'react-icons/fa'
 import {MdOutlineRemoveRedEye} from 'react-icons/md'
 import {Link} from 'react-router-dom'
 import {splitTime} from '../../helper/helperMethods'
@@ -8,7 +7,6 @@ import {splitTime} from '../../helper/helperMethods'
 
 function PostList({posts}) {
     //const posts = useSelector(state => state.postReducer.posts)
-    console.log(posts)
 
     return (
         <>
@@ -23,7 +21,7 @@ function PostList({posts}) {
                                 </div>
                                 
                                 <div className="flex flex-row space-x-3 mt-1">
-                                    <Link S
+                                    <Link
                                     key={post._id} 
                                     to={{
                                         pathname: `/postdetails/${post._id}`,
@@ -33,7 +31,7 @@ function PostList({posts}) {
                                         className="cursor-pointer" size={25}
                                         /> 
                                     </Link>
-                                    
+
                                     <RiDeleteBinLine 
                                     className="cursor-pointer" size={22}
                                     />
