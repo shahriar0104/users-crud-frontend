@@ -4,24 +4,49 @@ import PostList from '../posts/PostList'
 import {Link} from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
 import {HiOutlineUserAdd} from 'react-icons/hi'
-import {GoListUnordered} from 'react-icons/go'
-import { useHistory } from "react-router";
+import { useHistory } from "react-router"
+import {gql, useQuery} from "@apollo/client"
 
 function Home() {
-  const history = useHistory()
-  if(!localStorage.getItem('token')) history.push('/login')
-    const role = 'teacher'
+    const history = useHistory()
+
+    if(!localStorage.getItem('token')) history.push('/login')
+
+    const ROLE = localStorage.getItem('role')
+
+    const postListQuery = gql`
+    query findAllpost{
+        getAllPost {
+            _id
+            title
+            details
+            owner
+            time
+            comments{
+                commentor
+                commentDetails
+            }
+        }
+      }
+    `
+
+  const {loading, error, data} = useQuery(postListQuery)
+  if(loading) return 'loading'
+  if(error) return error.message
+
+  const postList = data.getAllPost
+
     return (
         <>
             <div className="flex flex-col">
                 <Navbar />
                 <div className="flex flex-col bg-yellow-50 sm:mx-10 md:mx-22 lg:mx-28 xl:mx-64 mx-4 mt-5 border-2 rounded-lg shadow-xl">
-                    {role === 'teacher' && 
+                    {ROLE === 'TEACHER' && 
                         <div className="flex flex-row justify-end">
                             <Link to='/studentlist'>
-                                <div className="bg-indigo-300 p-3 rounded-lg m-4 mx-3 hover:bg-indigo-400">
-                                    <GoListUnordered size={28}/>
-                                </div>
+                                <button className="bg-indigo-300 p-3 rounded-lg m-4 mx-3 hover:bg-indigo-400">
+                                    <div>User List</div>
+                                </button>
                             </Link>
                             <Link to='/adduser'>
                                 <div className="bg-indigo-300 p-3 rounded-lg m-4 mx-3 hover:bg-indigo-400">
@@ -31,11 +56,11 @@ function Home() {
                         </div>
                     }
 
-                    <div className={"flex flex-col w-full bg-gray-700 overflow-hidden " + (role === 'teacher' ? 'rounded-b-md' : 'rounded-md')}>
+                    <div className={"flex flex-col w-full bg-gray-700 overflow-hidden " + (ROLE === 'TEACHER' ? 'rounded-b-md' : 'rounded-md')}>
                         {
-                            role === 'teacher' && <CreatePost />
+                            ROLE === 'TEACHER' && <CreatePost />
                         }
-                        <PostList />
+                        <PostList posts = {postList}/>
                     </div>
                 </div> 
             </div>   

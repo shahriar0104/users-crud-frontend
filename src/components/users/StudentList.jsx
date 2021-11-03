@@ -19,13 +19,15 @@ function StudentList() {
   if(loading) return 'loading'
   if(error) return error.message
 
+  const students = data.getAllStudent
+
   return (
     <div className="flex flex-col">
       <Navbar />
       <div className="bg-yellow-50 m-4 mx-auto md:w-2/3 lg:w-1/2 sm:w-11/12 rounded-xl">
         <p className="mt-8 mb-4 text-center text-3xl text-black font-bold"> Student List</p>
 
-        {data.getAllStudent.map(({username, email}) => (
+        {students.length !==0 ? (students.map(({username, email}) => (
           <div key={username} className="list w-full">
             <div style={{ display: 'flex', justifyContent: "space-between inline block" }}>
               <div className="w-full px-3 mx-5 my-1 border-white border-4 rounded-lg
@@ -48,7 +50,7 @@ function StudentList() {
               </div>
             </div>
           </div>
-        ))}
+        ))) : <div>Not records found!!</div>}
       </div>
     </div>
   );
