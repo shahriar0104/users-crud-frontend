@@ -21,7 +21,7 @@ function Home() {
                                     <GoListUnordered size={28}/>
                                 </div>
                             </Link>
-                            <Link to='/addstudent'>
+                            <Link to='/adduser'>
                                 <div className="bg-indigo-300 p-3 rounded-lg m-4 mx-3 hover:bg-indigo-400">
                                     <HiOutlineUserAdd size={28}/>
                                 </div>
