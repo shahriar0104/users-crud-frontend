@@ -14,7 +14,6 @@ function TeacherList() {
       }
     }
   `
-
   const {loading, error, data} = useQuery(TEACHER_LIST)
   if(loading) return 'loading'
   if(error) return error.message
@@ -47,8 +46,6 @@ function TeacherList() {
     </div>
   );
 }
-
-
 
 export default TeacherList;
 
