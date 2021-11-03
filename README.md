@@ -24,6 +24,6 @@
 
 ## Instructions to Run the app
 
-Step 1: Install the packages using  `<npm install>`
-Step 2: Run the app in development mode using `<npm start>`
-Step 3: To deploy the app use `<npm run build>`
+Step 1: Install the packages using  `<npm install>` <br>
+Step 2: Run the app in development mode using `<npm start>` <br>
+Step 3: To deploy the app use `<npm run build>` <br>
