@@ -2,7 +2,13 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
 import Navbar from "../navbar/Navbar";
-import { GET_POST, POST_COMMENT, DELETE_POST,UPDATE } from "../../Queries/query";
+import {
+  GET_POST,
+  POST_COMMENT,
+  DELETE_POST,
+  UPDATE,
+} from "../../Queries/query";
+import PostGetter from "../../Actions/PostGetter";
 
 function PostDetails() {
   const id_post = useParams().postid;
@@ -23,10 +29,7 @@ function PostDetails() {
 
   const [postDelete] = useMutation(DELETE_POST);
 
-  const { loading, error, data } = useQuery(GET_POST, {
-    variables: { PostId },
-    fetchPolicy: "network-only",
-  });
+  const { loading, error, data } = PostGetter(PostId);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -35,6 +38,7 @@ function PostDetails() {
     event.preventDefault();
     const comment = event.target.body.value;
     event.target.reset();
+
     postComment({
       variables: {
         comment: {
@@ -44,19 +48,19 @@ function PostDetails() {
       },
     });
   }
- 
+
   function updatePost(event) {
     event.preventDefault();
-    const updatedDetails=event.target.details.value;
+    const updatedDetails = event.target.details.value;
     updateDetails({
-      variables:{
-        postId:{
-          _id:id_post
+      variables: {
+        postId: {
+          _id: id_post,
         },
-        update:{
-          details:updatedDetails
-        }
-      }
+        update: {
+          details: updatedDetails,
+        },
+      },
     });
     setUpdate(false);
   }
@@ -93,13 +97,15 @@ function PostDetails() {
 
             <div>
               {update ? (
-                <form id="details-form" onSubmit={(event)=>updatePost(event)}>
+                <form id="details-form" onSubmit={(event) => updatePost(event)}>
                   <div className="w-full px-3 my-2">
                     <textarea
                       className="rounded border border-gray-400 leading-normal resize-none w-full h-40 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
                       name="details"
                       required
-                    >{data && data.getPostById && data.getPostById.details}</textarea>
+                    >
+                      {data && data.getPostById && data.getPostById.details}
+                    </textarea>
                   </div>
                 </form>
               ) : (
@@ -169,7 +175,7 @@ function PostDetails() {
               data.getPostById &&
               data.getPostById.comments.map((item, key) => {
                 return (
-                  <div className="flex" key={key}>
+                  <div key={key}>
                     <div className="my-2">
                       <div className="bg-gray-100 w-auto rounded-xl p-2 pb-2">
                         <div className="font-medium">
