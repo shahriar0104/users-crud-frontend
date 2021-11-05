@@ -1,10 +1,5 @@
-import { useMutation } from "@apollo/client";
-import { GET_POST,UPDATE } from "../Queries/query";
 
-const UpdateDetails=(id_post,newDetails)=>{
-    const [updateDetails] = useMutation(UPDATE, {
-        refetchQueries: [GET_POST, "getPost"],
-      });
+const UpdateDetails=(updateDetails,id_post,newDetails)=>{
 
       updateDetails({
         variables:{

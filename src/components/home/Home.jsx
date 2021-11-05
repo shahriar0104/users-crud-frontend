@@ -29,7 +29,7 @@ function Home() {
     `
 
   const {loading, error, data} = useQuery(postListQuery)
-  if(loading) return loading
+   if(loading) return loading
   if(error) return error.message
 
   let postList = []

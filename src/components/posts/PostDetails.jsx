@@ -1,4 +1,4 @@
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
 import Navbar from "../navbar/Navbar";
@@ -9,6 +9,9 @@ import {
   UPDATE,
 } from "../../Queries/query";
 import PostGetter from "../../Actions/PostGetter";
+import UpdateDetails from "../../Actions/UpdateDetails";
+import AddComment from "../../Actions/AddComment";
+import DeletePost from "../../Actions/DeletePost";
 
 function PostDetails() {
   const id_post = useParams().postid;
@@ -38,46 +41,29 @@ function PostDetails() {
     event.preventDefault();
     const comment = event.target.body.value;
     event.target.reset();
-
-    postComment({
-      variables: {
-        comment: {
-          postId: id_post,
-          commentDetails: comment,
-        },
-      },
-    });
+    AddComment(postComment, id_post, comment);
   }
 
   function updatePost(event) {
     event.preventDefault();
-    const updatedDetails = event.target.details.value;
-    updateDetails({
-      variables: {
-        postId: {
-          _id: id_post,
-        },
-        update: {
-          details: updatedDetails,
-        },
-      },
-    });
+    const newDetails = event.target.details.value;
+    UpdateDetails(updateDetails, id_post, newDetails);
     setUpdate(false);
   }
   async function deletePost() {
-    await postDelete({
-      variables: {
-        PostId: {
-          _id: id_post,
-        },
-      },
-    }).then(() => history.push("../home"));
+    await DeletePost(postDelete,id_post).then(() => history.push("../home"));
+  }
+
+  function updateOnChange(event) {
+    event.preventDefault();
+    setUpdate(true);
   }
 
   return (
     <div>
       <Navbar />
-      <div className="w-1/3 mx-auto my-8">
+      {console.log(update)}
+      <div className="w-2/5 mx-auto my-8">
         <div className="shadow-md p-3">
           <div className="shadow-md mb-2 pb-2">
             <div className="flex px-4">
@@ -113,32 +99,35 @@ function PostDetails() {
                   {data && data.getPostById && data.getPostById.details}
                 </p>
               )}
+
               <div className="w-full flex items-start justify-end px-3">
                 {update ? (
-                  <div>
+                  <div className="-mr-1">
                     <button
                       type="submit"
-                      className=" bg-indigo-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
-                      tracking-wide mr-1 hover:bg-indigo-400"
+                      className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
+                      tracking-wide mr-1 hover:bg-indigo-500"
                       form="details-form"
                     >
                       Submit
                     </button>
                   </div>
-                ) : null}
-                <div className="-mr-1">
-                  <button
-                    className=" bg-indigo-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
-                      tracking-wide mr-1 hover:bg-indigo-400"
-                    onClick={() => setUpdate(true)}
-                  >
-                    Update Post
-                  </button>
-                </div>
+                ) : (
+                  <div className="-mr-1">
+                    <button
+                      type="submit"
+                      className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
+                      tracking-wide mr-1 hover:bg-indigo-500"
+                      onClick={(event) => updateOnChange(event)}
+                    >
+                      Update Post
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="ml-4">
+            <div className="mx-4">
               <form
                 className="w-full max-w-xl bg-white rounded-lg pt-2"
                 onSubmit={(event) => addComment(event)}
@@ -147,7 +136,7 @@ function PostDetails() {
                   <h2 className="px-4 pt-3 pb-2 text-gray-800 text-lg">
                     Add a new comment
                   </h2>
-                  <div className="w-full pl-2 mb-1 -mt-1">
+                  <div className="w-full px-2 mb-1 -mt-1">
                     <textarea
                       className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white focus:placeholder-opacity-0"
                       name="body"
@@ -156,13 +145,11 @@ function PostDetails() {
                     ></textarea>
                   </div>
                   <div className="w-full flex items-start justify-end">
-                    <div className="-mr-1">
                       <input
                         type="submit"
-                        className=" bg-indigo-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-indigo-400"
+                        className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-indigo-500"
                         value="Post Comment"
                       />
-                    </div>
                   </div>
                 </div>
               </form>
