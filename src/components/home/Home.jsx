@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CreatePost from '../posts/CreatePost'
 import PostList from '../posts/PostList'
 import {Link} from 'react-router-dom'
@@ -24,13 +24,14 @@ function Home() {
       }
     `
 
-  const {loading, error, data} = useQuery(postListQuery)
-   if(loading) return loading
-  if(error) return error.message
+    const {loading, error, data} = useQuery(postListQuery)
+    const [postList, setPostList] = useState([])
 
-  let postList = []
-  if(data)
-    postList = data.getAllPost
+    useEffect(() => {
+        if(loading) return loading
+        if(error) return error.message
+        if(data) setPostList(data.getAllPost)
+    })
 
     return (
         <>

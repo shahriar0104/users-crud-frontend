@@ -36,7 +36,7 @@ function Login() {
       }
     }).then(()=>
       history.push('/home')
-    )
+    ).catch(err=>console.log(err))
   }
 
   function usernameHandleChange(e){

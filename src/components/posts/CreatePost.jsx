@@ -27,6 +27,8 @@ function CreatePost() {
     }
 
     function handleAddPost(e) {
+        e.preventDefault()
+
         addPost({
           variables: {
             post: {

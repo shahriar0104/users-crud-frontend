@@ -1,5 +1,17 @@
 import gql from "graphql-tag";
 
+export const GET_ALL_POSTS = gql`
+  query findAllpost{
+      getAllPost {
+          _id
+          title
+          details
+          owner
+          time
+      }
+    }
+  `
+
 
 export const GET_POST = gql`
 query getPost($PostId: PostId) {
