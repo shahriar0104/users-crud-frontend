@@ -7,20 +7,23 @@ import {useQuery} from "@apollo/client"
 import {GET_ALL_POSTS} from '../../Queries/query'
 
 function PostList() {
-
-    const {loading, error, data} = useQuery(GET_ALL_POSTS)
+    const {loading, error, data} = useQuery(GET_ALL_POSTS, {
+        fetchPolicy: 'cache-and-network'
+    })
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
         if(loading) return loading
         if(error) return error.message
         if(data) setPosts(data.getAllPost)
-    })
+    }, [error, loading, data])
+
+    let reversedPostList = [...posts].reverse()
 
     return (
         <>
             {
-                posts.length !== 0 && posts.map((post) => {
+                posts.length !== 0 && reversedPostList.map((post) => {
                     return(
                         <div key={post._id} className="border m-2 p-2 bg-gray-100 rounded-lg">
                             <div className="flex flex-row justify-between">
@@ -47,7 +50,7 @@ function PostList() {
                                 </div>
                             </div>
                             <div className="pt-1">{post.details}</div>
-                            <div className="text-sm text-right text-gray-500">Comments: {post.comments ? post.comments.length : 0}</div>
+                            <div className="text-sm text-right text-gray-500">Comments: {post.comments.length}</div>
                         </div>
                     )
                 

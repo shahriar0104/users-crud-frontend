@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {gql, useMutation} from "@apollo/client"
+import {useMutation} from "@apollo/client"
+import {ADD_POST, GET_ALL_POSTS} from '../../Queries/query'
 
 function CreatePost() {
     const [inputs, setInputs] = useState({
@@ -7,15 +8,9 @@ function CreatePost() {
         description: ''
     })
 
-    const ADD_POST = gql`
-        mutation addPost($post: PostInput) {
-            createPost(postInput: $post) {
-                title
-                details
-            }
-        }
-    `
-    const [addPost] = useMutation(ADD_POST)
+    const [addPost] = useMutation(ADD_POST, {
+        refetchQueries: [GET_ALL_POSTS, "getAllPost"],
+    })
 
     const handleChange = e => {
         const {name, value} = e.target

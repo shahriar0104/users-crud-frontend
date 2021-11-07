@@ -7,9 +7,22 @@ export const GET_ALL_POSTS = gql`
           title
           details
           owner
+          comments{
+            commentor
+            commentDetails
+          }
           time
       }
     }
+  `
+
+export const ADD_POST = gql`
+  mutation addPost($post: PostInput) {
+      createPost(postInput: $post) {
+          title
+          details
+      }
+  }
   `
 
 
