@@ -30,6 +30,7 @@ export const GET_POST = gql`
 query getPost($PostId: PostId) {
   getPostById(postId: $PostId) {
     title
+    owner
     details
     comments {
       commentor

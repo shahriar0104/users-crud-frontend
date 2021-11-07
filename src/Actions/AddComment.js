@@ -1,8 +1,5 @@
-
-
 const AddComment= (postComment,id_post,comment) =>{
-
-      postComment({
+   postComment({
         variables: {
           comment: {
             postId: id_post,
@@ -10,6 +7,7 @@ const AddComment= (postComment,id_post,comment) =>{
           },
         },
       });
+    
 }
 
 export default AddComment;

@@ -18,6 +18,7 @@ function PostDetails() {
   const [update, setUpdate] = useState(false);
   const history = useHistory();
 
+  const user = localStorage.getItem("username");
   const PostId = {
     _id: id_post,
   };
@@ -51,7 +52,7 @@ function PostDetails() {
     setUpdate(false);
   }
   async function deletePost() {
-    await DeletePost(postDelete,id_post).then(() => history.push("../home"));
+    await DeletePost(postDelete, id_post).then(() => history.push("../home"));
   }
 
   function updateOnChange(event) {
@@ -62,7 +63,6 @@ function PostDetails() {
   return (
     <div>
       <Navbar />
-      {console.log(update)}
       <div className="w-2/5 mx-auto my-8">
         <div className="shadow-md rounded-md p-3">
           <div className="shadow-md rounded-md mb-2 pb-2">
@@ -70,15 +70,18 @@ function PostDetails() {
               <h1 className="text-3xl font-semibold text-center">
                 {data && data.getPostById && data.getPostById.title}
               </h1>
-              <div className="ml-auto">
-                <button
-                  className=" bg-red-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
+              {
+              data && user == data.getPostById.owner ? (
+                <div className="ml-auto">
+                  <button
+                    className=" bg-red-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
                     tracking-wide mr-1 hover:bg-white hover:text-red-500"
-                  onClick={(e) => deletePost(e)}
-                >
-                  Delete
-                </button>
-              </div>
+                    onClick={(e) => deletePost(e)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : null}
             </div>
 
             <div>
@@ -145,11 +148,11 @@ function PostDetails() {
                     ></textarea>
                   </div>
                   <div className="w-full flex items-start justify-end">
-                      <input
-                        type="submit"
-                        className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-indigo-500"
-                        value="Post Comment"
-                      />
+                    <input
+                      type="submit"
+                      className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-indigo-500"
+                      value="Post Comment"
+                    />
                   </div>
                 </div>
               </form>
