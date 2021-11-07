@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import {MdOutlineRemoveRedEye} from 'react-icons/md'
 import {Link} from 'react-router-dom'
 import {splitTime} from '../../helper/helperMethods'
-//import { useSelector } from 'react-redux'
+import {useQuery} from "@apollo/client"
+import {GET_ALL_POSTS} from '../../Queries/query'
 
-function PostList({posts}) {
-    //const posts = useSelector(state => state.postReducer.posts)
+function PostList() {
+
+    const {loading, error, data} = useQuery(GET_ALL_POSTS)
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        if(loading) return loading
+        if(error) return error.message
+        if(data) setPosts(data.getAllPost)
+    })
 
     return (
         <>
@@ -29,9 +38,12 @@ function PostList({posts}) {
                                         /> 
                                     </Link>
 
+                                    {post.owner === localStorage.getItem('username') 
+                                    &&
                                     <RiDeleteBinLine 
                                     className="cursor-pointer" size={22}
                                     />
+                                    }
                                 </div>
                             </div>
                             <div className="pt-1">{post.details}</div>

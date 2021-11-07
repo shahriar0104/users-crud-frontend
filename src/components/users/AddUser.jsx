@@ -50,6 +50,7 @@ function AddUser() {
         }
       }
     })
+    history.push('/home')
   }
 
   return (
