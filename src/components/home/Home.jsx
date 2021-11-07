@@ -20,10 +20,6 @@ function Home() {
             details
             owner
             time
-            comments{
-                commentor
-                commentDetails
-            }
         }
       }
     `
