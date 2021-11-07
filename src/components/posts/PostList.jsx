@@ -6,17 +6,17 @@ import {splitTime} from '../../helper/helperMethods'
 import {useQuery} from "@apollo/client"
 import {GET_ALL_POSTS} from '../../Queries/query'
 
-function PostList({render, setRender}) {
-    const {loading, error, data} = useQuery(GET_ALL_POSTS)
+function PostList() {
+    const {loading, error, data} = useQuery(GET_ALL_POSTS, {
+        fetchPolicy: 'cache-and-network'
+    })
     const [posts, setPosts] = useState([])
-
-    console.log('Rerendering', render)
 
     useEffect(() => {
         if(loading) return loading
         if(error) return error.message
         if(data) setPosts(data.getAllPost)
-    })
+    }, [error, loading, data])
 
     let reversedPostList = [...posts].reverse()
 
@@ -50,7 +50,7 @@ function PostList({render, setRender}) {
                                 </div>
                             </div>
                             <div className="pt-1">{post.details}</div>
-                            <div className="text-sm text-right text-gray-500">Comments: {post.comments ? post.comments.length : 0}</div>
+                            <div className="text-sm text-right text-gray-500">Comments: {post.comments.length}</div>
                         </div>
                     )
                 

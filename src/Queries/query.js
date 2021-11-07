@@ -7,6 +7,10 @@ export const GET_ALL_POSTS = gql`
           title
           details
           owner
+          comments{
+            commentor
+            commentDetails
+          }
           time
       }
     }

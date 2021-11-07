@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {gql, useMutation} from "@apollo/client"
+import {useMutation} from "@apollo/client"
 import {ADD_POST, GET_ALL_POSTS} from '../../Queries/query'
 
 function CreatePost() {

@@ -70,7 +70,6 @@ function Login() {
               <input
                 id="username"
                 name="username"
-                required
                 className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
                 onChange={e=>usernameHandleChange(e)}
@@ -88,7 +87,6 @@ function Login() {
                 id="password"
                 name="password"
                 type="password"
-                required
                 className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 onChange={e=>passwordHandleChange(e)}

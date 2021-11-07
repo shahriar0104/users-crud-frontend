@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CreatePost from '../posts/CreatePost'
 import PostList from '../posts/PostList'
 import {Link} from 'react-router-dom'
