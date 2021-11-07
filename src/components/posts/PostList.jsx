@@ -23,10 +23,7 @@ function PostList({posts}) {
                                 <div className="flex flex-row space-x-3 mt-1">
                                     <Link
                                     key={post._id} 
-                                    to={{
-                                        pathname: `/postdetails/${post._id}`,
-                                        state: {post}
-                                    }}>
+                                    to={{pathname: `/postdetails/${post._id}`}}>
                                         <MdOutlineRemoveRedEye
                                         className="cursor-pointer" size={25}
                                         /> 
