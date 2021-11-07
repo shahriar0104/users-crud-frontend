@@ -6,10 +6,11 @@ import {splitTime} from '../../helper/helperMethods'
 import {useQuery} from "@apollo/client"
 import {GET_ALL_POSTS} from '../../Queries/query'
 
-function PostList() {
-
+function PostList({render, setRender}) {
     const {loading, error, data} = useQuery(GET_ALL_POSTS)
     const [posts, setPosts] = useState([])
+
+    console.log('Rerendering', render)
 
     useEffect(() => {
         if(loading) return loading
@@ -17,10 +18,12 @@ function PostList() {
         if(data) setPosts(data.getAllPost)
     })
 
+    let reversedPostList = [...posts].reverse()
+
     return (
         <>
             {
-                posts.length !== 0 && posts.map((post) => {
+                posts.length !== 0 && reversedPostList.map((post) => {
                     return(
                         <div key={post._id} className="border m-2 p-2 bg-gray-100 rounded-lg">
                             <div className="flex flex-row justify-between">

@@ -1,37 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CreatePost from '../posts/CreatePost'
 import PostList from '../posts/PostList'
 import {Link} from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import { useHistory } from "react-router"
-import {gql, useQuery} from "@apollo/client"
 
 function Home() {
     const history = useHistory()
     if(!localStorage.getItem('token')) history.push('/login')
     const ROLE = localStorage.getItem('role')
-
-    const postListQuery = gql`
-    query findAllpost{
-        getAllPost {
-            _id
-            title
-            details
-            owner
-            time
-        }
-      }
-    `
-
-    const {loading, error, data} = useQuery(postListQuery)
-    const [postList, setPostList] = useState([])
-
-    useEffect(() => {
-        if(loading) return loading
-        if(error) return error.message
-        if(data) setPostList(data.getAllPost)
-    })
 
     return (
         <>
@@ -62,7 +40,7 @@ function Home() {
                         {
                             ROLE === 'TEACHER' && <CreatePost />
                         }
-                        <PostList posts = {postList}/>
+                        <PostList />
                     </div>
                 </div> 
             </div>   
