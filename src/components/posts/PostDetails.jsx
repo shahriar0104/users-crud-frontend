@@ -64,8 +64,8 @@ function PostDetails() {
       <Navbar />
       {console.log(update)}
       <div className="w-2/5 mx-auto my-8">
-        <div className="shadow-md p-3">
-          <div className="shadow-md mb-2 pb-2">
+        <div className="shadow-md rounded-md p-3">
+          <div className="shadow-md rounded-md mb-2 pb-2">
             <div className="flex px-4">
               <h1 className="text-3xl font-semibold text-center">
                 {data && data.getPostById && data.getPostById.title}
@@ -129,7 +129,7 @@ function PostDetails() {
 
             <div className="mx-4">
               <form
-                className="w-full max-w-xl bg-white rounded-lg pt-2"
+                className="w-full bg-white rounded-lg pt-2"
                 onSubmit={(event) => addComment(event)}
               >
                 <div className="flex flex-wrap -mx-3 mb-6">
