@@ -2,10 +2,8 @@ import React, {useState} from 'react'
 import {gql, useMutation} from "@apollo/client"
 
 function CreatePost() {
-    const [inputs, setInputs] = useState({
-        title: '', 
-        description: '',
-    })
+    const [title, setTitle] = useState('')
+    const [details, setDetails] = useState('')
 
     const ADD_POST = gql`
         mutation addPost($post: PostInput) {
@@ -13,6 +11,7 @@ function CreatePost() {
                 title
                 owner
                 details
+                comments
                 time
             }
         }
@@ -20,21 +19,24 @@ function CreatePost() {
     const [addPost] = useMutation(ADD_POST)
 
     const handleChange = e => {
-        const {name, value} = e.target
+        const {title, details} = e.target
 
-        setInputs({
-            ...inputs,
-            [name]: value
-        })
+        setTitle(title)
+        setDetails(details)
     }
 
     function handleAddPost(e) {
+        e.preventDefault()
+
+        console.log(title, details)
+
         addPost({
           variables: {
             post: {
-              title: inputs.title,
+              title: title,
               owner: localStorage.getItem('username'),
-              details: inputs.description,
+              details: details,
+              comments: [],
               time: new Date(),
             },
           },
@@ -43,25 +45,19 @@ function CreatePost() {
 
     return (
         <>
-            <form className="p-2" onSubmit={handleAddPost}>
-                <input type="text" 
-                name="title" 
-                className="w-full mb-2 p-2 rounded-md" 
-                placeholder="Enter post title"
+            <div className="p-2">
+                <input type="text" name="title" className="w-full mb-2 p-2 rounded-md" placeholder="Enter post title"
                 onChange={handleChange}
-                value={inputs.title}
                 required></input>
-                <textarea className="w-full h-28 my-1 p-2 border rounded-lg" 
-                type="text" 
-                placeholder="Announce something to your student..." 
-                name="description" 
+                <textarea className="w-full h-28 my-1 p-2 border rounded-lg" type="text" 
+                placeholder="Announce something to your student..." name="details" 
                 onChange={handleChange}
-                value={inputs.description}
                 required></textarea>
-                <button className="bg-blue-300 px-8 py-2 mb-2 mt-0 rounded-lg float-right hover:bg-blue-400">
+                <button className="bg-blue-300 px-8 py-2 mb-2 mt-0 rounded-lg float-right hover:bg-blue-400"
+                onClick={handleAddPost}>
                     Add Post
                 </button>
-            </form> 
+            </div> 
         </>
     )
 }
