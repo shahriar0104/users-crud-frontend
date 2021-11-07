@@ -38,7 +38,7 @@ function PostList({posts}) {
                                 </div>
                             </div>
                             <div className="pt-1">{post.details}</div>
-                            <div className="text-sm text-right text-gray-500">Comments: 0</div>
+                            <div className="text-sm text-right text-gray-500">Comments: {post.comments.length}</div>
                         </div>
                     )
                 
