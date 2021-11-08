@@ -20,7 +20,7 @@ function AddUser() {
 
   if(!localStorage.getItem('token')) history.push('/login')
 
-  const [input, {data, loading, error}] = useMutation(CREATE_USER)
+  const [input, {loading, error}] = useMutation(CREATE_USER)
   if (loading) return 'submitting'
   if (error) return error.message
 
