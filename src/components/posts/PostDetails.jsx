@@ -70,8 +70,7 @@ function PostDetails() {
               <h1 className="text-3xl font-semibold text-center">
                 {data && data.getPostById && data.getPostById.title}
               </h1>
-              {
-              data && user == data.getPostById.owner ? (
+              {data && user == data.getPostById.owner ? (
                 <div className="ml-auto">
                   <button
                     className=" bg-red-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
@@ -83,7 +82,6 @@ function PostDetails() {
                 </div>
               ) : null}
             </div>
-
             <div>
               {update ? (
                 <form id="details-form" onSubmit={(event) => updatePost(event)}>
@@ -102,32 +100,33 @@ function PostDetails() {
                   {data && data.getPostById && data.getPostById.details}
                 </p>
               )}
-
-              <div className="w-full flex items-start justify-end px-3">
-                {update ? (
-                  <div className="-mr-1">
-                    <button
-                      type="submit"
-                      className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
+              {data && user == data.getPostById.owner ? (
+                <div className="w-full flex items-start justify-end px-3">
+                  {update ? (
+                    <div className="-mr-1">
+                      <button
+                        type="submit"
+                        className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
                       tracking-wide mr-1 hover:bg-indigo-500"
-                      form="details-form"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                ) : (
-                  <div className="-mr-1">
-                    <button
-                      type="submit"
-                      className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
+                        form="details-form"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="-mr-1">
+                      <button
+                        type="submit"
+                        className=" bg-indigo-700 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
                       tracking-wide mr-1 hover:bg-indigo-500"
-                      onClick={(event) => updateOnChange(event)}
-                    >
-                      Update Post
-                    </button>
-                  </div>
-                )}
-              </div>
+                        onClick={(event) => updateOnChange(event)}
+                      >
+                        Update Post
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : null}
             </div>
 
             <div className="mx-4">
