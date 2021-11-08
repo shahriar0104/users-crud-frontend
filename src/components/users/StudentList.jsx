@@ -60,7 +60,6 @@ function StudentList() {
                   localStorage.getItem('role') === 'TEACHER' &&
                   <div>
                     <div className=' flex flex-row h-12'>
-                      <button className="bg-green-50 transition transform hover:scale-110 px-4 py-0 my-2 mx-4 rounded-full "><i className="fas fa-pen"></i></button>
                       <button className="bg-green-50 transition transform hover:scale-110 px-4 py-0 my-2 mx-4 rounded-full" onClick={(event)=>DeleteStudent(event,_id)}><i className="fa fa-trash"></i></button>
                     </div>
                   </div>

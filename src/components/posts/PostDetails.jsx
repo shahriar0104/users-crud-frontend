@@ -70,7 +70,7 @@ function PostDetails() {
               <h1 className="text-3xl font-semibold text-center">
                 {data && data.getPostById && data.getPostById.title}
               </h1>
-              {data && user == data.getPostById.owner ? (
+              {data && user === data.getPostById.owner ? (
                 <div className="ml-auto">
                   <button
                     className=" bg-red-500 text-white font-medium py-1 px-4 border border-gray-400 rounded-lg 
@@ -100,7 +100,7 @@ function PostDetails() {
                   {data && data.getPostById && data.getPostById.details}
                 </p>
               )}
-              {data && user == data.getPostById.owner ? (
+              {data && user === data.getPostById.owner ? (
                 <div className="w-full flex items-start justify-end px-3">
                   {update ? (
                     <div className="-mr-1">
