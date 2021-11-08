@@ -22,7 +22,7 @@ function Navbar() {
                 <div className="flex items-center h-16 cursor-pointer"
                 onClick={handleGoToHome}>
                     <div className="bg-green-300 px-2 mx-4 py-2 rounded-md hover:bg-green-400">
-                        <AiFillHome size={32}/>
+                        <AiFillHome size={28}/>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@ function Navbar() {
             <div className="flex items-center h-16 cursor-pointer"
             onClick={handleLogout}>
                 <div className="bg-red-400 px-2 mx-4 py-2 rounded-lg hover:bg-red-500">
-                    <RiLogoutCircleLine size={32}/>
+                    <RiLogoutCircleLine size={28}/>
                 </div>
             </div>
         </nav>

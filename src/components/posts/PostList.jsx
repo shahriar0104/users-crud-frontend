@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { RiDeleteBinLine } from 'react-icons/ri'
 import {MdOutlineRemoveRedEye} from 'react-icons/md'
 import {Link} from 'react-router-dom'
 import {splitTime} from '../../helper/helperMethods'
@@ -37,16 +36,9 @@ function PostList() {
                                     key={post._id} 
                                     to={{pathname: `/postdetails/${post._id}`}}>
                                         <MdOutlineRemoveRedEye
-                                        className="cursor-pointer" size={25}
+                                        className="cursor-pointer" size={28}
                                         /> 
                                     </Link>
-
-                                    {post.owner === localStorage.getItem('username') 
-                                    &&
-                                    <RiDeleteBinLine 
-                                    className="cursor-pointer" size={22}
-                                    />
-                                    }
                                 </div>
                             </div>
                             <div className="pt-1">{post.details}</div>

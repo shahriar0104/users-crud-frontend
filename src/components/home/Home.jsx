@@ -13,7 +13,7 @@ function Home() {
 
     return (
         <>
-            <div className="flex flex-col">
+            <div className="flex flex-col mb-4">
                 <Navbar />
                 <div className="flex flex-col bg-yellow-50 sm:mx-10 md:mx-22 lg:mx-28 xl:mx-64 mx-4 mt-5 border-2 rounded-lg shadow-xl">
                     {ROLE === 'TEACHER' && 
