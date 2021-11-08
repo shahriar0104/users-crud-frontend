@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
 import {gql, useMutation} from "@apollo/client"
 import { useHistory } from "react-router";
+import { STUDENT_LIST,TEACHER_LIST } from "../../Queries/query";
 
 function AddUser() {
   const history = useHistory()
@@ -17,10 +18,19 @@ function AddUser() {
       }
     }
   `
+  
 
   if(!localStorage.getItem('token')) history.push('/login')
 
-  const [input, {data, loading, error}] = useMutation(CREATE_USER)
+  const [input, {data, loading, error}] = useMutation(CREATE_USER,{
+    refetchQueries:[{
+      query:STUDENT_LIST
+    },
+    {
+      query:TEACHER_LIST
+    },
+  ]
+  })
   if (loading) return 'submitting'
   if (error) return error.message
 

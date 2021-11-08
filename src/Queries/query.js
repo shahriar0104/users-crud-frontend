@@ -63,3 +63,21 @@ export const UPDATE = gql`
    }
 
 `;
+
+export const STUDENT_LIST = gql`
+query getstudents{
+  getAllStudent{
+      _id
+      username
+      email
+  }
+}
+`
+export const TEACHER_LIST = gql`
+query getteachers{
+  getAllTeacher{
+      username
+      email
+  }
+}
+`

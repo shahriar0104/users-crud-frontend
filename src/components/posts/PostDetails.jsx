@@ -24,12 +24,15 @@ function PostDetails() {
   };
 
   const [postComment] = useMutation(POST_COMMENT, {
-    refetchQueries: [GET_POST, "getPost"],
-  });
+    refetchQueries:{
+      query:GET_POST
+    }
+  }
+);
 
   const [updateDetails] = useMutation(UPDATE, {
-    refetchQueries: [GET_POST, "getPost"],
-  });
+      refetchQueries: [GET_POST, "getPost"],
+    });
 
   const [postDelete] = useMutation(DELETE_POST);
 
@@ -38,11 +41,11 @@ function PostDetails() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  function addComment(event) {
+  async function addComment(event) {
     event.preventDefault();
     const comment = event.target.body.value;
     event.target.reset();
-    AddComment(postComment, id_post, comment);
+    await AddComment(postComment, id_post, comment).then(()=>window.location.reload())
   }
 
   function updatePost(event) {
@@ -65,7 +68,7 @@ function PostDetails() {
       <Navbar />
       <div className="w-2/5 mx-auto my-8">
         <div className="shadow-md rounded-md p-3">
-          <div className="shadow-md rounded-md mb-2 pb-2">
+          <div className="mb-2 pb-2">
             <div className="flex px-4">
               <h1 className="text-3xl font-semibold text-center">
                 {data && data.getPostById && data.getPostById.title}
